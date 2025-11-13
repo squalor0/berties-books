@@ -27,6 +27,19 @@ router.get('/addbook', function (req, res, next) {
     res.render('addbook.ejs');
 });
 
+router.get('/bargainbooks', function (req, res, next) {
+    let sqlquery = "SELECT * FROM books WHERE price < 20";
+
+    db.query(sqlquery, (err, result) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render('bargainbooks.ejs', { bargainBooks: result });
+        }
+    });
+});
+
+
 router.post('/bookadded', function (req, res, next) {
     // saving data in database
     let sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
