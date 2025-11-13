@@ -1,35 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bertie's Books – Book List</title>
+    <title>Welcome to Bertie&apos;s Books</title>
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
 
-<h1>Bertie's Book Shop</h1>
-<h2>Available Books</h2>
+    <h1>Bertie&apos;s Books Shop</h1>
 
-<table border="1" cellpadding="8" cellspacing="0">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Book Name</th>
-            <th>Price (£)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% availableBooks.forEach(function(book) { %>
-            <tr>
-                <td><%= book.id %></td>
-                <td><%= book.name %></td>
-                <td><%= book.price %></td>
-            </tr>
+    <h2>Here are the books that we sell:</h2>
+
+    <ul>
+        <% availableBooks.forEach(function (book) { %>
+            <li>
+                <%= book.name %>, &pound;<%= book.price %>
+            </li>
         <% }) %>
-    </tbody>
-</table>
+    </ul>
 
-<br>
-<a href="/">Back to Home</a>
+    <p><a href="/">Back to home</a></p>
 
 </body>
 </html>
