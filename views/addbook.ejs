@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a New Book – Bertie&apos;s Books</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+    <h1>Add a new book</h1>
+
+    <form action="/bookadded" method="POST">
+        <p>
+            <label for="name">Book name:</label>
+            <input type="text" id="name" name="name" required>
+        </p>
+
+        <p>
+            <label for="price">Price (£):</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+        </p>
+
+        <button type="submit">Add book</button>
+    </form>
+
+    <p><a href="/list">Back to book list</a></p>
+
+</body>
+</html>
