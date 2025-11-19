@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Users</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+    <h1>Registered Users</h1>
+
+    <h2>Here are the users who have registered:</h2>
+
+    <ul>
+        <% users.forEach(function(user) { %>
+            <li>
+                <strong><%= user.username %></strong><br>
+                <%= user.firstName %> <%= user.lastName %><br>
+                <%= user.email %>
+            </li>
+        <% }) %>
+    </ul>
+
+    <p><a href="/">Back to home</a></p>
+
+</body>
+</html>

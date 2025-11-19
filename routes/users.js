@@ -5,6 +5,17 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
+router.get('/list', function(req, res, next) {
+    let sqlquery = "SELECT username, firstName, lastName, email FROM users"; 
+
+    db.query(sqlquery, (err, result) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render("listusers.ejs", { users: result });
+        }
+    });
+});
 
 router.get('/register', function (req, res, next) {
     res.render('register.ejs')
@@ -29,7 +40,7 @@ router.post('/registered', function (req, res, next) {
                 next(err);
             } else {
                 result = 'Hello '+ req.body.first + ' '+ req.body.last +' you are now registered!  We will send an email to you at ' + req.body.email
-                result += ', Your password is: '+ req.body.password +' and your hashed password is: '+ hashedPassword
+                result += ', your password is: '+ req.body.password +' and your hashed password is: '+ hashedPassword
                 res.send(result)
             }
         });
