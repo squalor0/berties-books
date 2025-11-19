@@ -29,7 +29,7 @@ router.post('/registered', function (req, res, next) {
                 next(err);
             } else {
                 result = 'Hello '+ req.body.first + ' '+ req.body.last +' you are now registered!  We will send an email to you at ' + req.body.email
-                result += 'Your password is: '+ req.body.password +' and your hashed password is: '+ hashedPassword
+                result += ', Your password is: '+ req.body.password +' and your hashed password is: '+ hashedPassword
                 res.send(result)
             }
         });
