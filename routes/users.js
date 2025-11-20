@@ -17,6 +17,19 @@ router.get('/list', function(req, res, next) {
     });
 });
 
+router.get('/audit', function (req, res, next) {
+    let sqlquery = "SELECT username, success, time FROM audit ORDER BY time DESC";
+
+    db.query(sqlquery, (err, result) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render('audit.ejs', { auditRecords: result });
+        }
+    });
+});
+
+
 router.get('/register', function (req, res, next) {
     res.render('register.ejs')
 })
@@ -29,6 +42,16 @@ router.post('/loggedin', function (req, res, next) {
 
     let username = req.body.username;
 
+    function logAudit(username, success) {
+        let auditQuery = "INSERT INTO audit (username, success) VALUES (?, ?)";
+        db.query(auditQuery, [username, success], (err, result) => {
+            if (err) {
+                console.error("Audit log error:", err);
+            }
+        });
+    }
+
+
     // Select the hashed password for usr
     let sqlquery = "SELECT hashedPassword FROM users WHERE username = ?";
 
@@ -38,22 +61,26 @@ router.post('/loggedin', function (req, res, next) {
         } else {
             if (result.length == 0) {
                 // No username in database
+                logAudit(username, 0);
                 res.send("Login failed: incorrect username or password.");
             } else {
                 let hashedPassword = result[0].hashedPassword;
 
                 // Compare passwords
-                bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                bcrypt.compare(req.body.password, hashedPassword, function(err, compResult) {
                   if (err) {
                     // TODO: Handle error
+                    logAudit(username, 0);
                     res.send("An error occurred during login.");
                   }
-                  else if (result == true) {
+                  else if (compResult == true) {
                     // TODO: Send message
+                    logAudit(username, 1);
                     res.send("Login successful! Welcome, " + username + ".");
                   }
                   else {
                     // TODO: Send message
+                    logAudit(username, 0);
                     res.send("Login failed: incorrect username or password.");
                   }
                 });
