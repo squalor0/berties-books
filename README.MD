@@ -74,7 +74,7 @@ Base URL:
 
 This endpoint always returns data in JSON format.
 
-Query Parameters
+### Query Parameters
 
 `search`
 Returns only books whose name contains the given substring (case-insensitive).
@@ -101,7 +101,7 @@ Example:
 `/api/books?sort=name`
 `/api/books?sort=price`
 
-`Combined Examples`
+### Combined Examples
 
 Search for books containing the word "rock":
 `/api/books?search=rock`
