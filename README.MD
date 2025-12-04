@@ -65,6 +65,55 @@ These pages contain sensitive information or allow data modification, so they re
 Routes such as /books/list, /books/bargainbooks and /search remain publicly accessible so visitors can browse books without logging in.
 A logout route was added to allow users to end their session.
 
+## API
+
+This project includes a simple JSON API for accessing book data. The API allows clients to retrieve the list of books and optionally filter, sort, or search the results.
+
+Base URL:
+`/api/books`
+
+This endpoint always returns data in JSON format.
+
+Query Parameters
+
+`search`
+Returns only books whose name contains the given substring (case-insensitive).
+Example:
+`/api/books?search=world`
+
+`minprice`
+Returns only books with a price greater than or equal to the specified value.
+Example:
+`/api/books?minprice=10`
+
+`maxprice`
+Returns only books with a price less than or equal to the specified value.
+Example:
+`/api/books?maxprice=20`
+
+`Price range`
+You can combine minprice and maxprice:
+`/api/books?minprice=5&maxprice=15`
+
+`sort`
+Sorts the results by name or price in ascending order.
+Example:
+`/api/books?sort=name`
+`/api/books?sort=price`
+
+`Combined Examples`
+
+Search for books containing the word "rock":
+`/api/books?search=rock`
+
+Get books priced between £5 and £20, sorted by price:
+`/api/books?minprice=5&maxprice=20&sort=price`
+
+Search for books containing "new", priced under £15, sorted by name:
+`/api/books?search=new&maxprice=15&sort=name`
+
+All parameters are optional, and the API always returns a valid JSON array.
+
 ---
 
 ## Prerequisites
